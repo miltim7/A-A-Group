@@ -28,13 +28,23 @@ const testimonialsSwiper = new Swiper('.testimonials-slider', {
 });
 
 // Mobile menu toggle
-const navToggle = document.querySelector('.nav-toggle');
-const navMenu = document.querySelector('.nav-menu');
+const burger = document.getElementById('burger')
+const overlay = document.getElementById('overlay')
+const navMenu = document.getElementById('navMenu')
+const navLinks = navMenu.querySelectorAll('a')
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
-});
+function toggleMenu() {
+  burger.classList.toggle('active')
+  navMenu.classList.toggle('show')
+  overlay.classList.toggle('show')
+}
+
+burger.addEventListener('click', toggleMenu)
+overlay.addEventListener('click', toggleMenu)
+navLinks.forEach(link => {
+  link.addEventListener('click', toggleMenu)
+})
+
 
 // FAQ accordion
 const faqItems = document.querySelectorAll('.faq-item');
@@ -126,7 +136,7 @@ contactForm.addEventListener('submit', (e) => {
         // Add success message
         const successMessage = document.createElement('div');
         successMessage.className = 'form-success';
-        successMessage.textContent = 'Thank you for your message! We will contact you soon.';
+        successMessage.textContent = 'Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.';
         
         contactForm.insertAdjacentElement('beforebegin', successMessage);
         contactForm.reset();
